@@ -36,7 +36,7 @@ const presets: Preset[] = [
     color: '#4caf50',
     shadowColor: '#4caf50',
     bgColor: 'rgba(76, 175, 80, 0.15)',
-    borderColor: 'rgba(76, 175, 80, 1.0)',
+    borderColor: 'rgba(76, 175, 80, 0.5)',
     textColor: '#a5d7a7',
     iconUrl: image_5f0790967a2840f2ba79562fe5aad2ec7d74d8a5,
     description: 'For players who enjoy fast rounds and frequent small payouts. Ideal for steady, low-risk play.',
@@ -49,7 +49,7 @@ const presets: Preset[] = [
     color: '#2196f3',
     shadowColor: '#2196f3',
     bgColor: 'rgba(33, 150, 243, 0.15)',
-    borderColor: 'rgba(33, 150, 243, 1.0)',
+    borderColor: 'rgba(33, 150, 243, 0.5)',
     textColor: '#90caf9',
     iconUrl: image_ddf16409683ea9335750d1304ee126d33442b045,
     description: 'For players who like easy, colorful games with balanced wins and relaxed play sessions.',
@@ -62,7 +62,7 @@ const presets: Preset[] = [
     color: '#9c27b0',
     shadowColor: '#9c27b0',
     bgColor: 'rgba(156, 39, 176, 0.15)',
-    borderColor: 'rgba(156, 39, 176, 1.0)',
+    borderColor: 'rgba(156, 39, 176, 0.5)',
     textColor: '#ce93d8',
     iconUrl: image_417b07de3f3ec610397f17a3415f65046416825b,
     description: 'For players seeking lasting gameplay with steady progress and the occasional big win.',
@@ -75,7 +75,7 @@ const presets: Preset[] = [
     color: '#ff9800',
     shadowColor: '#ff9800',
     bgColor: 'rgba(255, 152, 0, 0.15)',
-    borderColor: 'rgba(255, 152, 0, 1.0)',
+    borderColor: 'rgba(255, 152, 0, 0.5)',
     textColor: '#ffb74d',
     iconUrl: image_ab43399dfdbaf83d7b37f3c72ea07924d19faf4c,
     description: 'For players who enjoy unpredictable rounds packed with excitement and bigger payouts.',
@@ -88,7 +88,7 @@ const presets: Preset[] = [
     color: '#b12e5f',
     shadowColor: '#b12e5f',
     bgColor: 'rgba(163, 38, 56, 0.15)',
-    borderColor: 'rgba(163, 38, 56, 1.0)',
+    borderColor: 'rgba(163, 38, 56, 0.5)',
     textColor: '#f48fb1',
     iconUrl: image_53d64683cbb955c4be3e27c840be8fc7a76d7408,
     description: 'For players confident in higher bets, where fewer wins can lead to major rewards.',
@@ -320,7 +320,7 @@ export function GamingFiltersModalV2() {
       <div className="box-border flex flex-col items-center py-[12px] w-full">
         
         {/* Title */}
-        <div className="box-border flex flex-col items-start pb-[12px] pl-[20px] pr-[12px] w-full">
+        <div className="box-border flex flex-col items-start pb-[12px] px-[12px] w-full">
           <div className="flex gap-[4px] h-[32px] items-center w-full">
             <p className="font-['Open_Sans:Bold',sans-serif] font-bold text-[14px] text-white" style={{ fontVariationSettings: "'wdth' 100" }}>
               Style of Play
@@ -343,7 +343,7 @@ export function GamingFiltersModalV2() {
           
           {/* Segment Control Wrapper - Scrollable preset buttons */}
           <div 
-            className="flex-1 overflow-x-scroll overflow-y-visible cursor-grab py-[12px] pl-[12px]"
+            className="flex-1 overflow-x-scroll overflow-y-visible cursor-grab py-[12px] pl-[12px] pr-[7px]"
             style={{ 
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
@@ -363,7 +363,12 @@ export function GamingFiltersModalV2() {
                     className="relative group shrink-0"
                     ref={el => buttonRefs.current[preset.id] = el}
                   >
-                    <div className="flex h-[32px] items-center px-[12px] py-[8px] rounded-[18px] relative z-10">
+                    <div 
+                      className="flex h-[32px] items-center px-[12px] py-[8px] rounded-[18px] relative z-10"
+                      style={{ 
+                        opacity: isActive ? 1 : 0.8
+                      }}
+                    >
                       <p 
                         className="capitalize font-['Open_Sans:SemiBold',sans-serif] font-semibold text-[12px] whitespace-nowrap" 
                         style={{ 
@@ -390,12 +395,7 @@ export function GamingFiltersModalV2() {
                 );
               })}
               
-              {/* ==================================================
-                START OF THE SPACER FIX:
-                Added a physical 8px spacer div after the loop
-                to force the correct padding on the last item.
-                ==================================================
-              */}
+              {/* Spacer div to create 8px gap before the divider */}
               <div className="w-[8px] h-[32px] shrink-0" />
             </div>
           </div>
@@ -411,34 +411,44 @@ export function GamingFiltersModalV2() {
             className="relative shrink-0 h-[32px] mr-[12px]"
           >
             <div 
-              className="flex h-[32px] items-center gap-[4px] px-[12px] py-[8px] rounded-[18px]"
+              className="flex h-[32px] items-center gap-[4px] px-[12px] py-[8px] rounded-[18px] relative z-10"
               style={{
-                opacity: isCustomMode ? 1 : 0.5
+                opacity: isCustomMode ? 1 : 0.8 
               }}
             >
               <div className="size-[12px]">
                 <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
-                  <path d={svgPaths.p2f7a000} stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.5" />
+                  <path 
+                    d={svgPaths.p2f7a000} 
+                    stroke={isCustomMode ? '#202735' : 'white'} 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth="0.5" 
+                  />
                 </svg>
               </div>
               <p 
                 className="capitalize font-['Open_Sans:SemiBold',sans-serif] font-semibold text-[12px]" 
                 style={{ 
                   fontVariationSettings: "'wdth' 100",
-                  color: '#ffffff'
+                  color: isCustomMode ? '#202735' : '#ffffff'
                 }}
               >
                 Custom
               </p>
             </div>
             
-            {/* Border */}
-            <div 
-              className="absolute inset-0 border border-solid rounded-[999px] pointer-events-none"
-              style={{
-                borderColor: isCustomMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.1)'
-              }}
-            />
+            {isCustomMode && (
+              <motion.div
+                layoutId="activePresetBg"
+                className="absolute inset-0 rounded-[999px]"
+                style={{ 
+                  backgroundColor: '#ffffff',
+                  boxShadow: '0px 0px 16px 3px rgba(255, 255, 255, 0.5)'
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+            )}
           </button>
         </div>
 
@@ -490,7 +500,9 @@ export function GamingFiltersModalV2() {
                     aria-hidden="true" 
                     className="absolute border border-solid inset-0 pointer-events-none rounded-[16px]"
                     style={{ 
-                      borderColor: 'rgba(255, 255, 255, 0.15)'
+                      borderColor: isCustomMode 
+                        ? 'rgba(255, 255, 255, 0.15)' 
+                        : (activePresetData ? activePresetData.borderColor : 'rgba(255, 255, 255, 0.15)')
                     }}
                   />
                   
@@ -502,7 +514,7 @@ export function GamingFiltersModalV2() {
                         <GaugeDisplay state={gaugeState} />
                       </div>
                       <div className="flex gap-[5px] items-center">
-                        <p className="font-['Open_Sans:Bold',sans-serif] font-bold text-[#acb0b9] text-[12px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                        <p className="font-['Open_Sans:Bold',sans-serif] font-bold text-white text-[12px]" style={{ fontVariationSettings: "'wdth' 100" }}>
                           Volatility
                         </p>
                         <div className="w-[14px] pl-[2px] pt-[2px]">
@@ -521,7 +533,25 @@ export function GamingFiltersModalV2() {
                       <div className="flex gap-[8px]">
                         {volatilityOptions.slice(0, 3).map((option) => {
                           const isSelected = selectedVolatility.includes(option);
-                          const borderColor = isSelected && activePresetData ? activePresetData.borderColor : 'rgba(255,255,255,0.1)';
+                          
+                          // Determine border color based on state
+                          let borderColor: string;
+                          if (!isSelected) {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          } else if (isCustomMode) {
+                            borderColor = 'rgba(255,255,255,0.5)';
+                          } else if (activePresetData) {
+                            borderColor = activePresetData.color; // 100% opacity for presets
+                          } else {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          }
+
+                          // Determine background color
+                          const backgroundColor = isSelected ? 'rgba(255,255,255,0.05)' : 'transparent';
+
+                          // Determine checkmark icon color and opacity
+                          const iconColor = isCustomMode ? '#ffffff' : (activePresetData?.color || '#ffffff');
+                          const iconOpacity = isCustomMode ? 0.5 : 1.0; // 50% for custom, 100% for presets
                           
                           return (
                             <button
@@ -530,38 +560,81 @@ export function GamingFiltersModalV2() {
                               className="h-[36px] relative rounded-[18px]"
                             >
                               <div 
-                                className="flex gap-[8px] h-[36px] items-center px-[14px] py-[8px] rounded-[inherit]"
+                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
+                                style={{ borderColor, borderWidth: '1px', transition: 'border-color 0.2s ease' }}
+                              />
+                              <motion.div 
+                                layout
+                                transition={{ 
+                                  layout: { duration: 0.3, ease: "easeInOut" } 
+                                }}
+                                className="flex gap-[0px] h-[36px] items-center justify-center px-[10px] py-[8px] rounded-[inherit] w-full"
                                 style={{
-                                  backgroundColor: isSelected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)'
+                                  backgroundColor
                                 }}
                               >
-                                <p className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white whitespace-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
-                                  {option}
-                                </p>
-                                <AnimatePresence initial={false}>
+                                <div className="px-[4px]"> {/* Text Wrapper */}
+                                  <p 
+                                    className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white whitespace-nowrap" 
+                                    style={{ fontVariationSettings: "'wdth' 100" }}
+                                  >
+                                    {option}
+                                  </p>
+                                </div>
+                                
+                                <AnimatePresence>
                                   {isSelected && (
                                     <motion.div 
-                                      initial={{ opacity: 0, maxWidth: 0 }}
-                                      animate={{ opacity: 1, maxWidth: 24 }}
-                                      exit={{ opacity: 0, maxWidth: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      className="overflow-hidden"
+                                      initial={{ width: 0, opacity: 0 }}
+                                      animate={{ 
+                                        width: 20, // 16px icon + 4px left padding
+                                        opacity: 1,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut" },
+                                          opacity: { duration: 0.2, delay: 0.1 } 
+                                        }
+                                      }}
+                                      exit={{ 
+                                        width: 0, 
+                                        opacity: 0,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut", delay: 0.1 }, 
+                                          opacity: { duration: 0.05 } // FASTER FADE OUT
+                                        }
+                                      }}
+                                      className="overflow-hidden flex items-center justify-center shrink-0"
                                     >
-                                      <div className="size-[16px]">
-                                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-                                          <path d={svgPaths.p30769300} fill="white" />
-                                          <path d={svgPaths.p681bf80} fill="#202735" />
-                                        </svg>
+                                      <div className="pl-[4px]"> {/* Icon Wrapper - left padding only */}
+                                        <div className="size-[16px] shrink-0">
+                                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+                                            <g clipPath={`url(#clip0_volatility_${option.replace(/\s/g, '')})`}>
+                                              <path 
+                                                d="M14.6654 8.00033C14.6654 11.6822 11.6806 14.667 7.9987 14.667C4.3168 14.667 1.33203 11.6822 1.33203 8.00033C1.33203 4.31843 4.3168 1.33366 7.9987 1.33366C11.6806 1.33366 14.6654 4.31843 14.6654 8.00033Z" 
+                                                stroke={iconColor}
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                              <path 
+                                                d="M5.33203 8.00033L7.33203 10.0003L10.6654 6.66699" 
+                                                stroke={iconColor}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                            </g>
+                                            <defs>
+                                              <clipPath id={`clip0_volatility_${option.replace(/\s/g, '')}`}>
+                                                <rect fill="white" height="16" width="16" />
+                                              </clipPath>
+                                            </defs>
+                                          </svg>
+                                        </div>
                                       </div>
                                     </motion.div>
                                   )}
                                 </AnimatePresence>
-                              </div>
-                              <div 
-                                aria-hidden="true" 
-                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
-                                style={{ borderColor }}
-                              />
+                              </motion.div>
                             </button>
                           );
                         })}
@@ -570,7 +643,25 @@ export function GamingFiltersModalV2() {
                       <div className="flex gap-[8px]">
                         {volatilityOptions.slice(3, 6).map((option) => {
                           const isSelected = selectedVolatility.includes(option);
-                          const borderColor = isSelected && activePresetData ? activePresetData.borderColor : 'rgba(255,255,255,0.1)';
+                          
+                          // Determine border color based on state
+                          let borderColor: string;
+                          if (!isSelected) {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          } else if (isCustomMode) {
+                            borderColor = 'rgba(255,255,255,0.5)';
+                          } else if (activePresetData) {
+                            borderColor = activePresetData.color; // 100% opacity for presets
+                          } else {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          }
+
+                          // Determine background color
+                          const backgroundColor = isSelected ? 'rgba(255,255,255,0.05)' : 'transparent';
+
+                          // Determine checkmark icon color and opacity
+                          const iconColor = isCustomMode ? '#ffffff' : (activePresetData?.color || '#ffffff');
+                          const iconOpacity = isCustomMode ? 0.5 : 1.0; // 50% for custom, 100% for presets
                           
                           return (
                             <button
@@ -579,38 +670,80 @@ export function GamingFiltersModalV2() {
                               className="h-[36px] relative rounded-[18px]"
                             >
                               <div 
-                                className="flex gap-[8px] h-[36px] items-center px-[14px] py-[8px] rounded-[inherit]"
+                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
+                                style={{ borderColor, borderWidth: '1px', transition: 'border-color 0.2s ease' }}
+                              />
+                              <motion.div 
+                                layout
+                                transition={{ 
+                                  layout: { duration: 0.3, ease: "easeInOut" } 
+                                }}
+                                className="flex gap-[0px] h-[36px] items-center justify-center px-[10px] py-[8px] rounded-[inherit] w-full"
                                 style={{
-                                  backgroundColor: isSelected ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)'
+                                  backgroundColor
                                 }}
                               >
-                                <p className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white whitespace-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
-                                  {option}
-                                </p>
-                                <AnimatePresence initial={false}>
+                                <div className="px-[4px]"> {/* Text Wrapper */}
+                                  <p 
+                                    className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white whitespace-nowrap" 
+                                    style={{ fontVariationSettings: "'wdth' 100" }}
+                                  >
+                                    {option}
+                                  </p>
+                                </div>
+                                <AnimatePresence>
                                   {isSelected && (
                                     <motion.div 
-                                      initial={{ opacity: 0, maxWidth: 0 }}
-                                      animate={{ opacity: 1, maxWidth: 24 }}
-                                      exit={{ opacity: 0, maxWidth: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      className="overflow-hidden"
+                                      initial={{ width: 0, opacity: 0 }}
+                                      animate={{ 
+                                        width: 20, // 16px icon + 4px left padding
+                                        opacity: 1,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut" },
+                                          opacity: { duration: 0.2, delay: 0.1 } 
+                                        }
+                                      }}
+                                      exit={{ 
+                                        width: 0, 
+                                        opacity: 0,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut", delay: 0.1 }, 
+                                          opacity: { duration: 0.05 } // FASTER FADE OUT
+                                        }
+                                      }}
+                                      className="overflow-hidden flex items-center justify-center shrink-0"
                                     >
-                                      <div className="size-[16px]">
-                                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-                                          <path d={svgPaths.p30769300} fill="white" />
-                                          <path d={svgPaths.p681bf80} fill="#202735" />
-                                        </svg>
+                                      <div className="pl-[4px]"> {/* Icon Wrapper - left padding only */}
+                                        <div className="size-[16px] shrink-0">
+                                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+                                            <g clipPath={`url(#clip0_volatility2_${option.replace(/\s/g, '')})`}>
+                                              <path 
+                                                d="M14.6654 8.00033C14.6654 11.6822 11.6806 14.667 7.9987 14.667C4.3168 14.667 1.33203 11.6822 1.33203 8.00033C1.33203 4.31843 4.3168 1.33366 7.9987 1.33366C11.6806 1.33366 14.6654 4.31843 14.6654 8.00033Z" 
+                                                stroke={iconColor}
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                              <path 
+                                                d="M5.33203 8.00033L7.33203 10.0003L10.6654 6.66699" 
+                                                stroke={iconColor}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                            </g>
+                                            <defs>
+                                              <clipPath id={`clip0_volatility2_${option.replace(/\s/g, '')}`}>
+                                                <rect fill="white" height="16" width="16" />
+                                              </clipPath>
+                                            </defs>
+                                          </svg>
+                                        </div>
                                       </div>
                                     </motion.div>
                                   )}
                                 </AnimatePresence>
-                              </div>
-                              <div 
-                                aria-hidden="true" 
-                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
-                                style={{ borderColor }}
-                              />
+                              </motion.div>
                             </button>
                           );
                         })}
@@ -620,7 +753,25 @@ export function GamingFiltersModalV2() {
                       <div className="flex flex-wrap gap-[8px]">
                         {volatilitySecondaryOptions.map((option) => {
                           const isSelected = selectedVolatility.includes(option);
-                          const borderColor = isSelected && activePresetData ? activePresetData.borderColor : 'rgba(255,255,255,0.1)';
+                          
+                          // Determine border color based on state
+                          let borderColor: string;
+                          if (!isSelected) {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          } else if (isCustomMode) {
+                            borderColor = 'rgba(255,255,255,0.5)';
+                          } else if (activePresetData) {
+                            borderColor = activePresetData.color; // 100% opacity for presets
+                          } else {
+                            borderColor = 'rgba(255,255,255,0.15)';
+                          }
+
+                          // Determine background color
+                          const backgroundColor = isSelected ? 'rgba(255,255,255,0.05)' : 'transparent';
+
+                          // Determine checkmark icon color and opacity
+                          const iconColor = isCustomMode ? '#ffffff' : (activePresetData?.color || '#ffffff');
+                          const iconOpacity = isCustomMode ? 0.5 : 1.0; // 50% for custom, 100% for presets
                           
                           return (
                             <button
@@ -629,38 +780,80 @@ export function GamingFiltersModalV2() {
                               className="h-[36px] relative rounded-[18px]"
                             >
                               <div 
-                                className="flex gap-[8px] h-[36px] items-center px-[14px] py-[8px] rounded-[inherit]"
+                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
+                                style={{ borderColor, borderWidth: '1px', transition: 'border-color 0.2s ease' }}
+                              />
+                              <motion.div 
+                                layout
+                                transition={{ 
+                                  layout: { duration: 0.3, ease: "easeInOut" } 
+                                }}
+                                className="flex gap-[0px] h-[36px] items-center px-[10px] py-[8px] rounded-[inherit] w-full"
                                 style={{
-                                  backgroundColor: 'transparent'
+                                  backgroundColor
                                 }}
                               >
-                                <p className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white" style={{ fontVariationSettings: "'wdth' 100" }}>
-                                  {option}
-                                </p>
-                                <AnimatePresence initial={false}>
+                                <div className="px-[4px]"> {/* Text Wrapper */}
+                                  <p 
+                                    className="capitalize font-['Open_Sans:Regular',sans-serif] text-[12px] text-white" 
+                                    style={{ fontVariationSettings: "'wdth' 100" }}
+                                  >
+                                    {option}
+                                  </p>
+                                </div>
+                                <AnimatePresence>
                                   {isSelected && (
                                     <motion.div 
-                                      initial={{ opacity: 0, maxWidth: 0 }}
-                                      animate={{ opacity: 1, maxWidth: 24 }}
-                                      exit={{ opacity: 0, maxWidth: 0 }}
-                                      transition={{ duration: 0.2 }}
-                                      className="overflow-hidden"
+                                      initial={{ width: 0, opacity: 0 }}
+                                      animate={{ 
+                                        width: 20, // 16px icon + 4px left padding
+                                        opacity: 1,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut" },
+                                          opacity: { duration: 0.2, delay: 0.1 } 
+                                        }
+                                      }}
+                                      exit={{ 
+                                        width: 0, 
+                                        opacity: 0,
+                                        transition: { 
+                                          width: { duration: 0.2, ease: "easeInOut", delay: 0.1 }, 
+                                          opacity: { duration: 0.05 } // FASTER FADE OUT
+                                        }
+                                      }}
+                                      className="overflow-hidden flex items-center justify-center shrink-0"
                                     >
-                                      <div className="size-[16px]">
-                                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-                                          <path d={svgPaths.p30769300} fill="white" />
-                                          <path d={svgPaths.p681bf80} fill="#202735" />
-                                        </svg>
+                                      <div className="pl-[4px]"> {/* Icon Wrapper - left padding only */}
+                                        <div className="size-[16px] shrink-0">
+                                          <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+                                            <g clipPath={`url(#clip0_volatility_secondary_${option.replace(/\s/g, '')})`}>
+                                              <path 
+                                                d="M14.6654 8.00033C14.6654 11.6822 11.6806 14.667 7.9987 14.667C4.3168 14.667 1.33203 11.6822 1.33203 8.00033C1.33203 4.31843 4.3168 1.33366 7.9987 1.33366C11.6806 1.33366 14.6654 4.31843 14.6654 8.00033Z" 
+                                                stroke={iconColor}
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                              <path 
+                                                d="M5.33203 8.00033L7.33203 10.0003L10.6654 6.66699" 
+                                                stroke={iconColor}
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="1"
+                                                strokeOpacity={iconOpacity}
+                                              />
+                                            </g>
+                                            <defs>
+                                              <clipPath id={`clip0_volatility_secondary_${option.replace(/\s/g, '')}`}>
+                                                <rect fill="white" height="16" width="16" />
+                                              </clipPath>
+                                            </defs>
+                                          </svg>
+                                        </div>
                                       </div>
                                     </motion.div>
                                   )}
                                 </AnimatePresence>
-                              </div>
-                              <div 
-                                aria-hidden="true" 
-                                className="absolute border border-solid inset-0 pointer-events-none rounded-[18px]"
-                                style={{ borderColor }}
-                              />
+                              </motion.div>
                             </button>
                           );
                         })}
@@ -676,7 +869,9 @@ export function GamingFiltersModalV2() {
                     aria-hidden="true" 
                     className="absolute border border-solid inset-0 pointer-events-none rounded-[16px]"
                     style={{ 
-                      borderColor: 'rgba(255, 255, 255, 0.15)'
+                      borderColor: isCustomMode 
+                        ? 'rgba(255, 255, 255, 0.15)' 
+                        : (activePresetData ? activePresetData.borderColor : 'rgba(255, 255, 255, 0.15)')
                     }}
                   />
                   
